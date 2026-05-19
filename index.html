@@ -1,71 +1,146 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Certificate of Completion</title>
+
   <style>
     body {
+      margin: 0;
+      padding: 40px;
+      background-color: #f5f5f5;
       font-family: Georgia, serif;
       text-align: center;
-      background: #f5f5f5;
-      padding: 40px;
     }
+
     .certificate {
       background: white;
-      border: 12px solid #1f4e79;
-      padding: 60px;
-      max-width: 900px;
+      max-width: 1000px;
       margin: auto;
+      padding: 70px;
+      border: 12px solid #1f4e79;
+      box-shadow: 0 0 15px rgba(0,0,0,0.15);
     }
+
     h1 {
-      font-size: 48px;
+      color: #1f4e79;
+      font-size: 52px;
+      margin-bottom: 40px;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+
+    .name {
+      font-size: 46px;
+      font-weight: bold;
+      margin: 30px 0;
+      color: #000;
+    }
+
+    .training {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 30px 0;
       color: #1f4e79;
     }
-    .name {
-      font-size: 40px;
-      font-weight: bold;
-      margin: 30px;
+
+    .date {
+      font-size: 22px;
+      margin-top: 25px;
     }
-    .training {
-      font-size: 28px;
-      font-weight: bold;
-    }
-    .small {
+
+    .footer {
+      margin-top: 60px;
       font-size: 20px;
-      margin-top: 30px;
+      color: #444;
+    }
+
+    .signature-line {
+      margin-top: 70px;
+      width: 300px;
+      border-top: 2px solid #000;
+      margin-left: auto;
+      margin-right: auto;
+      padding-top: 10px;
+      font-size: 18px;
+    }
+
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+
+      .certificate {
+        box-shadow: none;
+        border-width: 8px;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<div class="certificate">
-  <h1>Certificate of Completion</h1>
+  <div class="certificate">
 
-  <p>This certifies that</p>
+    <h1>Certificate of Completion</h1>
 
-  <div class="name" id="studentName"></div>
+    <div class="subtitle">
+      This certifies that
+    </div>
 
-  <p>has successfully completed</p>
+    <div class="name" id="studentName">
+      Student Name
+    </div>
 
-  <div class="training" id="trainingName"></div>
+    <div class="subtitle">
+      has successfully completed
+    </div>
 
-  <p class="small">Completed on:</p>
-  <p class="small" id="completionTime"></p>
+    <div class="training" id="trainingName">
+      History of Terminology and Current Etiquette
+    </div>
 
-  <p class="small">Creighton University School of Dentistry</p>
-</div>
+    <div class="date">
+      Completed on:
+      <span id="completionTime"></span>
+    </div>
 
-<script>
-  const params = new URLSearchParams(window.location.search);
+    <div class="footer">
+      Creighton University School of Dentistry
+    </div>
 
-  document.getElementById("studentName").textContent =
-    params.get("name") || "Student Name";
+    <div class="signature-line">
+      Authorized Signature
+    </div>
 
-  document.getElementById("trainingName").textContent =
-    params.get("training") || "Training Name";
+  </div>
 
-  document.getElementById("completionTime").textContent =
-    params.get("time") || new Date().toLocaleString();
-</script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const studentName =
+      params.get("name") || "Student Name";
+
+    const trainingName =
+      params.get("training") || "History of Terminology and Current Etiquette";
+
+    const completionTime =
+      params.get("time") || new Date().toLocaleString();
+
+    document.getElementById("studentName").textContent =
+      decodeURIComponent(studentName);
+
+    document.getElementById("trainingName").textContent =
+      decodeURIComponent(trainingName);
+
+    document.getElementById("completionTime").textContent =
+      decodeURIComponent(completionTime);
+  </script>
 
 </body>
 </html>
