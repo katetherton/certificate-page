@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Certificate of Completion</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      text-align: center;
+      background: #f5f5f5;
+      padding: 40px;
+    }
+    .certificate {
+      background: white;
+      border: 12px solid #1f4e79;
+      padding: 60px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      font-size: 48px;
+      color: #1f4e79;
+    }
+    .name {
+      font-size: 40px;
+      font-weight: bold;
+      margin: 30px;
+    }
+    .training {
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .small {
+      font-size: 20px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="certificate">
+  <h1>Certificate of Completion</h1>
+
+  <p>This certifies that</p>
+
+  <div class="name" id="studentName"></div>
+
+  <p>has successfully completed</p>
+
+  <div class="training" id="trainingName"></div>
+
+  <p class="small">Completed on:</p>
+  <p class="small" id="completionTime"></p>
+
+  <p class="small">Creighton University School of Dentistry</p>
+</div>
+
+<script>
+  const params = new URLSearchParams(window.location.search);
+
+  document.getElementById("studentName").textContent =
+    params.get("name") || "Student Name";
+
+  document.getElementById("trainingName").textContent =
+    params.get("training") || "Training Name";
+
+  document.getElementById("completionTime").textContent =
+    params.get("time") || new Date().toLocaleString();
+</script>
+
+</body>
+</html>
